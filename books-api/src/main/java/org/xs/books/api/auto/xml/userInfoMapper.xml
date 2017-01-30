@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xs.books.api.auto.dao.userInfoMapper">
+  <resultMap id="BaseResultMap" type="org.xs.books.api.auto.dto.userInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="weixin_id" jdbcType="VARCHAR" property="weixinId" />
+    <result column="weixin_name" jdbcType="VARCHAR" property="weixinName" />
+    <result column="weibo_id" jdbcType="VARCHAR" property="weiboId" />
+    <result column="weibo_name" jdbcType="VARCHAR" property="weiboName" />
+    <result column="github_id" jdbcType="VARCHAR" property="githubId" />
+    <result column="github_name" jdbcType="VARCHAR" property="githubName" />
+    <result column="douban_id" jdbcType="VARCHAR" property="doubanId" />
+    <result column="douban_name" jdbcType="VARCHAR" property="doubanName" />
+    <result column="user_img_url" jdbcType="VARCHAR" property="userImgUrl" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="job_num" jdbcType="VARCHAR" property="jobNum" />
+    <result column="profile" jdbcType="VARCHAR" property="profile" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nick_name, email, phone, password, weixin_id, weixin_name, weibo_id, weibo_name, 
+    github_id, github_name, douban_id, douban_name, user_img_url, user_name, job_num, 
+    profile, create_time, role
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from books_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from books_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.xs.books.api.auto.dto.userInfo">
+    insert into books_user (id, nick_name, email, 
+      phone, password, weixin_id, 
+      weixin_name, weibo_id, weibo_name, 
+      github_id, github_name, douban_id, 
+      douban_name, user_img_url, user_name, 
+      job_num, profile, create_time, 
+      role)
+    values (#{id,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{weixinId,jdbcType=VARCHAR}, 
+      #{weixinName,jdbcType=VARCHAR}, #{weiboId,jdbcType=VARCHAR}, #{weiboName,jdbcType=VARCHAR}, 
+      #{githubId,jdbcType=VARCHAR}, #{githubName,jdbcType=VARCHAR}, #{doubanId,jdbcType=VARCHAR}, 
+      #{doubanName,jdbcType=VARCHAR}, #{userImgUrl,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{jobNum,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.xs.books.api.auto.dto.userInfo">
+    insert into books_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="weixinId != null">
+        weixin_id,
+      </if>
+      <if test="weixinName != null">
+        weixin_name,
+      </if>
+      <if test="weiboId != null">
+        weibo_id,
+      </if>
+      <if test="weiboName != null">
+        weibo_name,
+      </if>
+      <if test="githubId != null">
+        github_id,
+      </if>
+      <if test="githubName != null">
+        github_name,
+      </if>
+      <if test="doubanId != null">
+        douban_id,
+      </if>
+      <if test="doubanName != null">
+        douban_name,
+      </if>
+      <if test="userImgUrl != null">
+        user_img_url,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="jobNum != null">
+        job_num,
+      </if>
+      <if test="profile != null">
+        profile,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinId != null">
+        #{weixinId,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinName != null">
+        #{weixinName,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboId != null">
+        #{weiboId,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboName != null">
+        #{weiboName,jdbcType=VARCHAR},
+      </if>
+      <if test="githubId != null">
+        #{githubId,jdbcType=VARCHAR},
+      </if>
+      <if test="githubName != null">
+        #{githubName,jdbcType=VARCHAR},
+      </if>
+      <if test="doubanId != null">
+        #{doubanId,jdbcType=VARCHAR},
+      </if>
+      <if test="doubanName != null">
+        #{doubanName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImgUrl != null">
+        #{userImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNum != null">
+        #{jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.xs.books.api.auto.dto.userInfo">
+    update books_user
+    <set>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinId != null">
+        weixin_id = #{weixinId,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinName != null">
+        weixin_name = #{weixinName,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboId != null">
+        weibo_id = #{weiboId,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboName != null">
+        weibo_name = #{weiboName,jdbcType=VARCHAR},
+      </if>
+      <if test="githubId != null">
+        github_id = #{githubId,jdbcType=VARCHAR},
+      </if>
+      <if test="githubName != null">
+        github_name = #{githubName,jdbcType=VARCHAR},
+      </if>
+      <if test="doubanId != null">
+        douban_id = #{doubanId,jdbcType=VARCHAR},
+      </if>
+      <if test="doubanName != null">
+        douban_name = #{doubanName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImgUrl != null">
+        user_img_url = #{userImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNum != null">
+        job_num = #{jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.xs.books.api.auto.dto.userInfo">
+    update books_user
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      weixin_id = #{weixinId,jdbcType=VARCHAR},
+      weixin_name = #{weixinName,jdbcType=VARCHAR},
+      weibo_id = #{weiboId,jdbcType=VARCHAR},
+      weibo_name = #{weiboName,jdbcType=VARCHAR},
+      github_id = #{githubId,jdbcType=VARCHAR},
+      github_name = #{githubName,jdbcType=VARCHAR},
+      douban_id = #{doubanId,jdbcType=VARCHAR},
+      douban_name = #{doubanName,jdbcType=VARCHAR},
+      user_img_url = #{userImgUrl,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      job_num = #{jobNum,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      role = #{role,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
