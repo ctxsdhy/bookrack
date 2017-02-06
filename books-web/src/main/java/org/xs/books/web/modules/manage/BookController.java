@@ -1,6 +1,4 @@
-package org.xs.books.web.modules.front;
-
-import java.util.List;
+package org.xs.books.web.modules.manage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,26 +6,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.xs.books.api.entity.UserInfo;
 import org.xs.books.api.service.UserService;
 import org.xs.books.web.common.web.BaseController;
 
 /**
- * 首页Controller
+ * 书籍管理Controller
  */
 @Controller
-@RequestMapping(value = "/")
-public class HomeController extends BaseController {
+@RequestMapping(value = "/manage")
+public class BookController extends BaseController {
 	
 	@Autowired
 	UserService UserService;
 	
 	/**
-	 * 首页
+	 * 书籍列表
 	 */
-	@RequestMapping(value = "/")
-	public String home(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/book")
+	public String book(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "modules/front/home/index";
+		return "modules/manage/book/list";
 	}
 }

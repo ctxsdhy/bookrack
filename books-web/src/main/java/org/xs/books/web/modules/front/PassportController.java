@@ -1,33 +1,30 @@
 package org.xs.books.web.modules.front;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.xs.books.api.entity.UserInfo;
 import org.xs.books.api.service.UserService;
 import org.xs.books.web.common.web.BaseController;
 
 /**
- * 首页Controller
+ * 认证Controller
  */
 @Controller
 @RequestMapping(value = "/")
-public class HomeController extends BaseController {
+public class PassportController extends BaseController {
 	
 	@Autowired
 	UserService UserService;
 	
 	/**
-	 * 首页
+	 * 登录
 	 */
-	@RequestMapping(value = "/")
-	public String home(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/login")
+	public String login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		return "modules/front/home/index";
+		return "modules/front/passport/login";
 	}
 }

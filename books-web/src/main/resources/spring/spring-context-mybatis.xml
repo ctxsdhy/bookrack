@@ -29,14 +29,6 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
-	<!-- 定义事务 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务  -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-	
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 
 	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
@@ -73,7 +65,7 @@
 	</bean>
 	
 	<!-- 开启事务注解驱动 -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<tx:annotation-driven transaction-manager="transactionManager" /><!-- proxy-target-class="true" -->
 	
 	<!--  声明式容器事务管理 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -91,7 +83,7 @@
 	<!-- 定义切面 -->
 	<aop:config expose-proxy="true">
 		<!-- 实施事务 -->
-		<aop:pointcut id="txPointcut" expression="execution(* org.xs.books.api.dao.*(..))" />
+		<aop:pointcut id="txPointcut" expression="execution(* org.xs.books.api.dao.*.*(..))" />
 		<!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
 	</aop:config>
