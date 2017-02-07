@@ -2,24 +2,24 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<!-- 项目信息 -->
-	<groupId>org.xs.books</groupId>
-	<artifactId>books</artifactId>
-	<version>${books.version}</version>
+	<groupId>org.xs.bookrack</groupId>
+	<artifactId>bookrack</artifactId>
+	<version>${bookrack.version}</version>
 	<packaging>pom</packaging>
 	
 	<!-- 项目模块 -->
 	<modules>
-		<module>books-web</module>
-		<module>books-api</module>
+		<module>bookrack-web</module>
+		<module>bookrack-api</module>
 	</modules>
 	
 	<!-- 项目属性 -->
 	<properties>
 		
 		<!-- 项目版本 -->
-		<books.version>1.0.0-SNAPSHOT</books.version>
-		<books-api.version>1.0.0-SNAPSHOT</books-api.version>
-		<books-web.version>1.0.0-SNAPSHOT</books-web.version>
+		<bookrack.version>1.0.0-SNAPSHOT</bookrack.version>
+		<bookrack-api.version>1.0.0-SNAPSHOT</bookrack-api.version>
+		<bookrack-web.version>1.0.0-SNAPSHOT</bookrack-web.version>
 		
 		<!-- spring -->
 		<spring.version>4.3.5.RELEASE</spring.version>

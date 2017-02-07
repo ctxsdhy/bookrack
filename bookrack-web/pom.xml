@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- 项目信息 -->
+	<artifactId>bookrack-web</artifactId>
+	<version>${bookrack-web.version}</version>
+	<packaging>war</packaging>
+	
+	<!-- 父级模块 -->
+	<parent>
+		<groupId>org.xs.bookrack</groupId>
+		<artifactId>bookrack</artifactId>
+		<version>${bookrack.version}</version>
+	</parent>
+	
+	<!-- 引用资源 -->
+	<dependencies>
+		
+		<!-- bookrack-api -->
+		<dependency>
+		    <groupId>org.xs.bookrack</groupId>
+		    <artifactId>bookrack-api</artifactId>
+		    <version>${bookrack-api.version}</version>
+		</dependency>
+		
+		<!-- web -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>${velocity.version}</version>
+		</dependency>
+		
+		<!-- security -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-cas</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+	</dependencies>
+</project>
