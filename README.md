@@ -1,2 +1,2 @@
-# books
-基于Spring MVC开发的图书管理网站
+# bookrack
+基于Spring MVC开发的书籍分享网站
