@@ -2,6 +2,7 @@ package org.xs.bookrack.api.common.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.xs.bookrack.api.common.persistence.CrudDao;
 import org.xs.bookrack.api.common.persistence.DataEntity;
@@ -21,21 +22,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	
 	/**
 	 * 获取单条数据
-	 * @param id
-	 * @return
-	 *//*
-	public T get(String id) {
-		return dao.get(id);
-	}
-	
-	*//**
-	 * 获取单条数据
 	 * @param entity
 	 * @return
-	 *//*
+	 */
 	public T get(T entity) {
 		return dao.get(entity);
-	}*/
+	}
 	
 	/**
 	 * 查询列表数据
@@ -56,29 +48,26 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 		entity.setPage(page);
 		page.setList(dao.findList(entity));
 		return page;
-	}
+	}*/
 
-	*//**
-	 * 保存数据（插入或更新）
+	/**
+	 * 保存数据（新增或更新）
 	 * @param entity
-	 *//*
-	@Transactional(readOnly = false)
+	 */
 	public void save(T entity) {
-		if (entity.getIsNewRecord()){
-			entity.preInsert();
-			dao.insert(entity);
+		if(StringUtils.isEmpty(entity.getId())){
+			entity.generateId();
+			dao.add(entity);
 		}else{
-			entity.preUpdate();
 			dao.update(entity);
 		}
 	}
 	
-	*//**
+	/**
 	 * 删除数据
 	 * @param entity
-	 *//*
-	@Transactional(readOnly = false)
+	 */
 	public void delete(T entity) {
-		dao.delete(entity);
-	}*/
+		dao.delete(entity.getId());
+	}
 }

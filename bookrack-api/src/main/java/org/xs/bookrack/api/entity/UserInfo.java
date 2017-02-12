@@ -16,6 +16,11 @@ public class UserInfo extends DataEntity<UserInfo>  {
      * 邮箱
      */
     private String email;
+    
+    /**
+     * 邮箱状态
+     */
+    private String emailState;
 
     /**
      * 手机
@@ -127,6 +132,22 @@ public class UserInfo extends DataEntity<UserInfo>  {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**  
+	 * 获取email_state  
+	 * @return email_state email_state  
+	 */
+	public String getEmailState() {
+		return emailState;
+	}
+
+	/**  
+	 * 设置email_state  
+	 * @param email_state email_state  
+	 */
+	public void setEmail_state(String emailState) {
+		this.emailState = emailState;
 	}
 
 	/**  

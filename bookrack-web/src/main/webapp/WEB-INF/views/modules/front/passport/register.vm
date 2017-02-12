@@ -1,0 +1,102 @@
+#parse("/include/head.vm")
+	<script type="text/javascript">
+		$(function() {
+			
+			$.fn.form.settings.rules.nickNameIsExist = function(value) {
+				/*var flag;
+				$.ajax({
+					async : false,
+					url: 你的url,
+					type: "POST",
+					data: {
+						nick_name : value
+					},
+					success: function(data) {
+						flag = data;
+					}
+				});
+				return !flag;*/
+				return true;
+			}
+			
+			$.fn.form.settings.rules.emailIsExist = function(value) {
+				/*var flag;
+				$.ajax({
+					async : false,
+					url: 你的url,
+					type: "POST",
+					data: {
+						nick_name : value
+					},
+					success: function(data) {
+						flag = data;
+					}
+				});
+				return !flag;*/
+				return true;
+			}
+    
+			$('.ui.form').form({
+				fields: {
+					nick_name: {
+						rules: [
+							{
+								type: 'empty',
+								prompt: '请输入昵称'
+							}, 
+							{
+								type: 'nickNameIsExist',
+								prompt: '昵称已存在'
+							}]
+					},
+					email: {
+						rules: [
+							{
+								type: 'email',
+								prompt: '邮箱地址不正确'
+							}, 
+							{
+								type: 'emailIsExist',
+								prompt: '邮箱已注册'
+							}]
+					},
+					password: {
+						rules: [
+							{
+								type: 'minLength[6]',
+								prompt: '密码最少{ruleValue}位'
+							}, 
+							{
+								type: 'maxLength[30]',
+								prompt: '密码最多{ruleValue}位'
+							}]
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	#parse("/include/top.vm")
+	<div class="b-body">
+		<div class="b-login">
+			<form class="ui form stacked segment" action="/doRegister" method="post">
+				<div class="field">
+					<input type="text" name="nickName" placeholder="昵称">
+				</div>
+				<div class="field">
+					<input type="text" name="email" placeholder="邮箱">
+				</div>
+				<div class="field">
+					<input type="password" name="password" placeholder="密码">
+				</div>
+				<div class="ui center">
+					<button class="ui green button" type="submit">立即注册</button>
+					<a class="ui basic button" href="/login">已有账号</a>
+				</div>
+				<div class="ui error message"></div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

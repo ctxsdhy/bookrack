@@ -38,8 +38,8 @@
 		<property name="filterChainDefinitions">
 			<value>
 				<!-- /static/** = anon
-				/favicon.ico = anon -->
-				/manage/* = authc
+				/favicon.ico = anon 
+				/manage/* = authc -->
 				/* = anon
 			</value>
 		</property>

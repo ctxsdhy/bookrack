@@ -1,0 +1,11 @@
+#parse("/include/head.vm")
+</head>
+<body>
+	#parse("/include/top.vm")
+	<div class="b-body">
+		<div>个人信息</div>
+		<div>666</div>
+		<div></div>
+	</div>
+</body>
+</html>

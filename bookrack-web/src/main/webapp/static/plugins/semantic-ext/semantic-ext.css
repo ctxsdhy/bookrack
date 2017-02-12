@@ -4,3 +4,6 @@
 	border-right: none;
 	border-radius: 0!important;
 }
+.ui.center {
+	text-align: center;
+}

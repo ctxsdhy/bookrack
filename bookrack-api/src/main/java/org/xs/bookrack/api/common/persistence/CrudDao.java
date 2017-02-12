@@ -7,20 +7,13 @@ import java.util.List;
  * @param <T>
  */
 public interface CrudDao<T> {
-
-	/**
-	 * 获取单条数据
-	 * @param id
-	 * @return
-	 *//*
-	public T get(String id);
 	
-	*//**
+	/**
 	 * 获取单条数据
 	 * @param entity
 	 * @return
-	 *//*
-	public T get(T entity);*/
+	 */
+	public T get(T entity);
 	
 	/**
 	 * 查询数据列表
@@ -30,24 +23,23 @@ public interface CrudDao<T> {
 	public List<T> findList(T entity);
 	
 	/**
-	 * 插入数据
+	 * 新增数据
 	 * @param entity
 	 * @return
-	 *//*
-	public int insert(T entity);
+	 */
+	public int add(T entity);
 	
-	*//**
+	/**
 	 * 更新数据
 	 * @param entity
 	 * @return
-	 *//*
+	 */
 	public int update(T entity);
 	
-	*//**
+	/**
 	 * 删除数据
 	 * @param entity
 	 * @return
-	 *//*
-	public int delete(String id);*/
-	
+	 */
+	public int delete(String id);
 }

@@ -1,11 +1,45 @@
 #parse("/include/head.vm")
+	<script type="text/javascript">
+		$(function() {
+			$('.ui.form').form({
+				fields: {
+					email: {
+						rules: [
+							{
+								type: 'email',
+								prompt: '邮箱地址不正确'
+							}]
+					},
+					password: {
+						rules: [
+							{
+								type: 'empty',
+								prompt: '请输入密码'
+							}]
+					}
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	#parse("/include/top.vm")
 	<div class="b-body">
-		<div>酷炫的登录框</div>
-		<div>酷不酷</div>
-		<div></div>
+		<div class="b-login">
+			<form class="ui form stacked segment">
+				<div class="field">
+					<input type="text" name="email" placeholder="邮箱">
+				</div>
+				<div class="field">
+					<input type="password" name="password" placeholder="密码">
+				</div>
+				<div class="ui center">
+					<button class="ui blue button" type="submit">立即登录</button>
+					<a class="ui basic button" href="/register">注册账户</a>
+				</div>
+				<div class="ui error message"></div>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

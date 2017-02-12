@@ -47,8 +47,7 @@ public class UserRealm extends AuthorizingRealm {
 		
 		String userId = token.getUsername();
         if (userId != null && !"".equals(userId)) {
-            //UserInfo userInfo = userService.get(userId);
-        	UserInfo userInfo = new UserInfo();
+            UserInfo userInfo = userService.get(userId);
             if (userInfo != null) {
                 return new SimpleAuthenticationInfo(userInfo.getId(), userInfo.getPassword(), getName());
             }
