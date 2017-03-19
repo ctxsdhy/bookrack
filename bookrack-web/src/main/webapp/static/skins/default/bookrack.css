@@ -1,3 +1,6 @@
+body {
+	overflow-y: scroll;
+}
 .b-top {
 	width: 960px;
 	margin: 0 auto!important;
@@ -9,4 +12,30 @@
 .b-login {
 	max-width: 300px;
 	margin: 0 auto!important;
+}
+#b-m-menu {
+	width: auto;
+}
+.b-top > .item:first-child:before {
+	width:0!important;
+}
+.b-top > div {
+	line-height: 1.3!important;
+}
+.b-bookitem {
+	width: 180px!important;
+	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+.ui.card>.content>.header:not(.ui), .ui.cards>.card>.content>.header:not(.ui) {
+	font-weight: normal;
+	font-size: 14px;
+}
+.ui.card>.content, .ui.cards>.card>.content {
+	padding: 14px 14px 12px 14px;
+}
+.b-bookitem>.image {
+	height: 260px;
+}
+.b-bookitem .meta {
+	margin-top: 5px;
 }

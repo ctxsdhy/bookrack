@@ -15,6 +15,8 @@
 		FROM bookrack_user
 		<where>1=1
 			<if test="id != null and id != ''">AND id = #{id}</if>
+			<if test="email != null and email != ''">AND email = #{email}</if>
+			<if test="password != null and password != ''">AND password = #{password}</if>
 		</where>
 	</select>
 	
@@ -42,21 +44,21 @@
 	<update id="update">
 		UPDATE bookrack_user
 		<set>
-			<if test="nick_name != null and nick_name != ''">nick_name = #{nickName}, </if>
+			<if test="nickName != null and nickName != ''">nick_name = #{nickName}, </if>
 			<if test="email != null and email != ''">email = #{email}, </if>
 			<if test="phone != null and phone != ''">phone = #{phone}, </if>
 			<if test="password != null and password != ''">password = #{password}, </if>
-			<if test="weixin_id != null and weixin_id != ''">weixin_id = #{weixinId}, </if>
-			<if test="weixin_name != null and weixin_name != ''">weixin_name = #{weixinName}, </if>
-			<if test="weibo_id != null and weibo_id != ''">weibo_id = #{weiboId}, </if>
-			<if test="weibo_name != null and weibo_name != ''">weibo_name = #{weiboName}, </if>
-			<if test="github_id != null and github_id != ''">github_id = #{githubId}, </if>
-			<if test="github_name != null and github_name != ''">github_name = #{githubName}, </if>
-			<if test="douban_id != null and douban_id != ''">douban_id = #{doubanId}, </if>
-			<if test="douban_name != null and douban_name != ''">douban_name = #{doubanName}, </if>
-			<if test="user_img_url != null and user_img_url != ''">user_img_url = #{userImgUrl}, </if>
-			<if test="user_name != null and user_name != ''">user_name = #{userName}, </if>
-			<if test="job_num != null and job_num != ''">job_num = #{jobNum}, </if>
+			<if test="weixinId != null and weixinId != ''">weixin_id = #{weixinId}, </if>
+			<if test="weixinName != null and weixinName != ''">weixin_name = #{weixinName}, </if>
+			<if test="weiboId != null and weiboId != ''">weibo_id = #{weiboId}, </if>
+			<if test="weiboName != null and weiboName != ''">weibo_name = #{weiboName}, </if>
+			<if test="githubId != null and githubId != ''">github_id = #{githubId}, </if>
+			<if test="githubName != null and githubName != ''">github_name = #{githubName}, </if>
+			<if test="doubanId != null and doubanId != ''">douban_id = #{doubanId}, </if>
+			<if test="doubanName != null and doubanName != ''">douban_name = #{doubanName}, </if>
+			<if test="userImgUrl != null and userImgUrl != ''">user_img_url = #{userImgUrl}, </if>
+			<if test="userName != null and userName != ''">user_name = #{userName}, </if>
+			<if test="jobNum != null and jobNum != ''">job_num = #{jobNum}, </if>
 			<if test="profile != null and profile != ''">profile = #{profile}, </if>
 			<if test="role != null and role != ''">role = #{role}, </if>
 		</set>

@@ -5,17 +5,21 @@ public class bookInfo {
 
     private String isbn;
 
-    private String average;
+    private String title;
 
     private String subtitle;
 
     private String originTitle;
+
+    private String average;
 
     private String author;
 
     private String translator;
 
     private String pubdate;
+
+    private String publisher;
 
     private String image;
 
@@ -47,12 +51,12 @@ public class bookInfo {
         this.isbn = isbn;
     }
 
-    public String getAverage() {
-        return average;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAverage(String average) {
-        this.average = average;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSubtitle() {
@@ -69,6 +73,14 @@ public class bookInfo {
 
     public void setOriginTitle(String originTitle) {
         this.originTitle = originTitle;
+    }
+
+    public String getAverage() {
+        return average;
+    }
+
+    public void setAverage(String average) {
+        this.average = average;
     }
 
     public String getAuthor() {
@@ -93,6 +105,14 @@ public class bookInfo {
 
     public void setPubdate(String pubdate) {
         this.pubdate = pubdate;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     public String getImage() {

@@ -5,6 +5,7 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="email_state" jdbcType="VARCHAR" property="emailState" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="weixin_id" jdbcType="VARCHAR" property="weixinId" />
@@ -23,9 +24,9 @@
     <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, nick_name, email, phone, password, weixin_id, weixin_name, weibo_id, weibo_name, 
-    github_id, github_name, douban_id, douban_name, user_img_url, user_name, job_num, 
-    profile, create_time, role
+    id, nick_name, email, email_state, phone, password, weixin_id, weixin_name, weibo_id, 
+    weibo_name, github_id, github_name, douban_id, douban_name, user_img_url, user_name, 
+    job_num, profile, create_time, role
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -39,19 +40,19 @@
   </delete>
   <insert id="insert" parameterType="org.xs.bookrack.api.auto.dto.userInfo">
     insert into bookrack_user (id, nick_name, email, 
-      phone, password, weixin_id, 
-      weixin_name, weibo_id, weibo_name, 
-      github_id, github_name, douban_id, 
-      douban_name, user_img_url, user_name, 
-      job_num, profile, create_time, 
-      role)
+      email_state, phone, password, 
+      weixin_id, weixin_name, weibo_id, 
+      weibo_name, github_id, github_name, 
+      douban_id, douban_name, user_img_url, 
+      user_name, job_num, profile, 
+      create_time, role)
     values (#{id,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{weixinId,jdbcType=VARCHAR}, 
-      #{weixinName,jdbcType=VARCHAR}, #{weiboId,jdbcType=VARCHAR}, #{weiboName,jdbcType=VARCHAR}, 
-      #{githubId,jdbcType=VARCHAR}, #{githubName,jdbcType=VARCHAR}, #{doubanId,jdbcType=VARCHAR}, 
-      #{doubanName,jdbcType=VARCHAR}, #{userImgUrl,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
-      #{jobNum,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{role,jdbcType=VARCHAR})
+      #{emailState,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{weixinId,jdbcType=VARCHAR}, #{weixinName,jdbcType=VARCHAR}, #{weiboId,jdbcType=VARCHAR}, 
+      #{weiboName,jdbcType=VARCHAR}, #{githubId,jdbcType=VARCHAR}, #{githubName,jdbcType=VARCHAR}, 
+      #{doubanId,jdbcType=VARCHAR}, #{doubanName,jdbcType=VARCHAR}, #{userImgUrl,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{jobNum,jdbcType=VARCHAR}, #{profile,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{role,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.xs.bookrack.api.auto.dto.userInfo">
     insert into bookrack_user
@@ -64,6 +65,9 @@
       </if>
       <if test="email != null">
         email,
+      </if>
+      <if test="emailState != null">
+        email_state,
       </if>
       <if test="phone != null">
         phone,
@@ -124,6 +128,9 @@
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
+      <if test="emailState != null">
+        #{emailState,jdbcType=VARCHAR},
+      </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
@@ -183,6 +190,9 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="emailState != null">
+        email_state = #{emailState,jdbcType=VARCHAR},
+      </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
@@ -238,6 +248,7 @@
     update bookrack_user
     set nick_name = #{nickName,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      email_state = #{emailState,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       weixin_id = #{weixinId,jdbcType=VARCHAR},

@@ -1,0 +1,16 @@
+#parse("/include/head.vm")
+</head>
+<body>
+	#parse("/include/top.vm")
+	<div class="b-body">
+		<div class="ui grid">
+			<div class="three wide column">
+				#parse("/modules/manage/include/left.vm")
+			</div>
+			<div class="thirteen wide column">
+				标签列表
+			</div>
+		</div>
+	</div>
+</body>
+</html>

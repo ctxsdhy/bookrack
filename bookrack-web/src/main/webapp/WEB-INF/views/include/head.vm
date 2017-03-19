@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html>
 <head>
-	<title>开放书架</title>
+	<title>开放の书架</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<meta name="Keywords" content="开放,书架,分享"/>
 	<meta name="description" content="开放书架是一个部门内部的技术书籍分享平台，让同事之间的书籍分享更简单" />
@@ -13,8 +13,17 @@
 	<meta http-equiv="Cache-Control" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-store" />
 	#set($path=$rc.contextPath)
-	<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 	<link href="https://cdn.staticfile.org/semantic-ui/2.2.7/semantic.min.css" rel="stylesheet" type="text/css"/>
-	<script src="https://cdn.staticfile.org/semantic-ui/2.2.7/semantic.min.js" type="text/javascript"></script>
-	<link href="${path}/static/plugins/semantic-ext/semantic-ext.css" rel="stylesheet" type="text/css"/>
 	<link href="${path}/static/skins/default/bookrack.css" rel="stylesheet" type="text/css"/>
+	<link href="${path}/static/plugins/semantic-ext/semantic-ext.css" rel="stylesheet" type="text/css"/>
+	<script src="https://cdn.staticfile.org/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://cdn.staticfile.org/semantic-ui/2.2.7/semantic.min.js" type="text/javascript"></script>
+	<script src="${path}/static/plugins/layer/layer.js" type="text/javascript"></script>
+	<script src="${path}/static/plugins/bookrack/bookrack.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#logo').click(function() {
+				$(this).transition('shake');
+			});
+		});
+	</script>

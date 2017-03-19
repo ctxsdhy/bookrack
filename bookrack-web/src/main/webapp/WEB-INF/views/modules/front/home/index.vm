@@ -1,11 +1,53 @@
 #parse("/include/head.vm")
+	<script type="text/javascript">
+		$(function() {
+			$('.special.cards .image').dimmer({
+				on: 'hover'
+			});
+		});
+	</script>
 </head>
 <body>
 	#parse("/include/top.vm")
 	<div class="b-body">
-		<div>最新上架</div>
-		<div>部门书架</div>
-		<div></div>
+		##<div>最新上架</div>
+		##<div>部门书架</div>
+		<div class="b-allbook">
+			<div class="ui special cards">
+				#foreach($userBook in $!userBookList)
+					<div class="card b-bookitem">
+						<div class="blurring dimmable image">
+							<div class="ui dimmer">
+								<div class="content">
+									<div class="center">
+										<a class="ui inverted button" href="https://book.douban.com/isbn/$userBook.getBookInfo().getIsbn()" target="_blank">查看书籍</a>
+									</div>
+								</div>
+							</div>
+							<img src="$userBook.getBookInfo().getImage()">
+						</div>
+						<div class="content">
+							<a class="header" href="https://book.douban.com/isbn/$userBook.getBookInfo().getIsbn()" target="_blank">$userBook.getBookInfo().getTitle()</a>
+							##<div class="meta">
+								
+							##</div>
+						</div>
+						<div class="extra content">
+							<a>
+								#if($userBook.getLocation() == '1')
+									<i class="home icon"></i>在家
+								#elseif($userBook.getLocation() == '2')
+									<i class="building outline icon"></i>在公司
+								#elseif($userBook.getLocation() == '3')
+									<i class="folder open outline icon"></i>在部门书架
+								#end
+							</a>
+						</div>
+					</div>
+				#end
+				<div class="ui clearing"></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

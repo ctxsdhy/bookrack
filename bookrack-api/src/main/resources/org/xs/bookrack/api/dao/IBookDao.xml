@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xs.bookrack.api.dao.IBookDao">
+	
+	<!-- 字段 -->
+	<sql id="columnList">
+		id, isbn, title, subtitle, origin_title, average, author, translator, pubdate, publisher, image, 
+		binding, pages, price, summary, author_intro, catalog
+	</sql>
+	
+	<!-- 获取单条数据 -->
+	<select id="get" resultType="org.xs.bookrack.api.entity.BookInfo">
+		SELECT <include refid="columnList" />
+		FROM bookrack_book
+		<where>1=1
+			<if test="id != null and id != ''">AND id = #{id}</if>
+			<if test="isbn != null and isbn != ''">AND isbn = #{isbn}</if>
+		</where>
+	</select>
+	
+	<!-- 查询数据列表 -->
+	<select id="findList" resultType="org.xs.bookrack.api.entity.BookInfo">
+		SELECT <include refid="columnList" />
+		FROM bookrack_book
+		<where>1=1
+		</where>
+	</select>
+	
+	<!-- 插入数据 -->
+	<insert id="add">
+		INSERT INTO bookrack_book
+			(id, isbn, title, subtitle, origin_title, average, author, translator, pubdate, publisher, image, 
+			binding, pages, price, summary, author_intro, catalog)
+		VALUES
+			(#{id}, #{isbn}, #{title}, #{subtitle}, #{originTitle}, #{average}, #{author}, #{translator}, #{pubdate}, #{publisher}, #{image},
+			#{binding}, #{pages}, #{price}, #{summary}, #{authorIntro}, #{catalog})
+	</insert>
+	
+	<!-- 更新数据 -->
+	<update id="update">
+		UPDATE bookrack_book
+		<set>
+			<if test="isbn != null and isbn != ''">isbn = #{isbn}, </if>
+			<if test="title != null and title != ''">title = #{title}, </if>
+			<if test="subtitle != null and subtitle != ''">subtitle = #{subtitle}, </if>
+			<if test="originTitle != null and originTitle != ''">origin_title = #{originTitle}, </if>
+			<if test="average != null and average != ''">average = #{average}, </if>
+			<if test="author != null and author != ''">author = #{author}, </if>
+			<if test="translator != null and translator != ''">translator = #{translator}, </if>
+			<if test="pubdate != null and pubdate != ''">pubdate = #{pubdate}, </if>
+			<if test="publisher != null and publisher != ''">publisher = #{publisher}, </if>
+			<if test="image != null and image != ''">image = #{image}, </if>
+			<if test="binding != null and binding != ''">binding = #{binding}, </if>
+			<if test="pages != null and pages != ''">pages = #{pages}, </if>
+			<if test="price != null and price != ''">price = #{price}, </if>
+			<if test="summary != null and summary != ''">summary = #{summary}, </if>
+			<if test="authorIntro != null and authorIntro != ''">author_intro = #{authorIntro}, </if>
+			<if test="catalog != null and catalog != ''">catalog = #{catalog}, </if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 删除数据 -->
+	<delete id="delete">
+		DELETE FROM bookrack_book
+		WHERE id = #{id}
+	</delete>
+</mapper>

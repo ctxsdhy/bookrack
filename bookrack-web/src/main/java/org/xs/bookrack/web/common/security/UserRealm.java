@@ -4,6 +4,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -11,7 +12,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xs.bookrack.api.common.utils.ContextUtils;
 import org.xs.bookrack.api.entity.UserInfo;
 import org.xs.bookrack.api.service.UserService;
 
@@ -20,14 +20,17 @@ import org.xs.bookrack.api.service.UserService;
  */
 @Service
 public class UserRealm extends AuthorizingRealm {
-
+	
+	@Autowired
+	UserService userService;
+	
 	/**
 	 * 获取授权信息
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		
-		String userId = (String) getAvailablePrincipal(principals);
+		UserInfo userInfo = (UserInfo) getAvailablePrincipal(principals);
 		
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addStringPermission("admin");
@@ -41,17 +44,18 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		
-		UserService userService = ContextUtils.getBean(UserService.class);
-		
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		
-		String userId = token.getUsername();
-        if (userId != null && !"".equals(userId)) {
-            UserInfo userInfo = userService.get(userId);
-            if (userInfo != null) {
-                return new SimpleAuthenticationInfo(userInfo.getId(), userInfo.getPassword(), getName());
-            }
-        }
-		return null;
+		//验证用户信息
+		UserInfo userInfoReq = new UserInfo();
+		userInfoReq.setEmail(token.getUsername());
+		userInfoReq.setPassword(String.valueOf(token.getPassword()));
+		UserInfo userInfo = userService.get(userInfoReq);
+		if(userInfo != null) {
+			
+			return new SimpleAuthenticationInfo(userInfo, userInfo.getPassword(), getName());
+		} else {
+			throw new UnknownAccountException();
+		}
 	}
 }

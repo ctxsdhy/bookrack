@@ -1,0 +1,222 @@
+#parse("/include/head.vm")
+	<script src="${path}/static/plugins/douban/book.js" type="text/javascript"></script>
+	<script src="${path}/static/plugins/underscore/underscore-min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var books;
+		$(function() {
+			
+			//加载评分
+			$('.ui.rating').rating().css('margin-top', '10px');
+			//加载下拉框
+			if($('#location').val() != '') {
+				$('select.dropdown.location').dropdown("set selected", $('#location').val());
+			} else {
+				$('select.dropdown.location').dropdown();
+			}
+			if($('#level').val() != '') {
+				$('select.dropdown.level').dropdown("set selected", $('#level').val());
+			} else {
+				$('select.dropdown.level').dropdown();
+			}
+			//选中事件
+			$('#searchName').dropdown({
+				onChange: function(value, text) {
+					//加载书籍
+					loadBook(_.find(books.books, function(b) { return b.isbn13 == value; }));
+				}
+			});
+			
+			//编辑时加载书籍
+			if($('#isbn').val() != '') {
+				$('#searchBook').hide();
+				douban.book.get($('#isbn').val(), loadBook);
+			}
+			
+			//查找书籍事件
+			$('#searchName').parent().find('.search').on('input propertychange', function() {
+				$('#hdSearchName').val($(this).val());
+			});
+			$('#btnSearch').click(function() {
+				douban.book.search($('#hdSearchName').val(), 10, loadSearch);
+			});
+		});
+		
+		//加载搜索框
+		function loadSearch(bookList) {
+			$('#searchName').parent().find('.menu').empty();
+			if(bookList && bookList.count > 0) {
+				books = bookList;
+				for(var i=0; i<bookList.count; i++) {
+					$('#searchName').parent().find('.menu').append('<div class="item" data-value="' + bookList.books[i].isbn13 + '">' + bookList.books[i].title + '</div>');
+				}
+			}
+			$('#searchName').dropdown('show');
+		}
+		
+		//加载书籍
+		function loadBook(book) {
+			$('#imageUrl').prop('src', book.images.large);
+			$('input[name=image]').val(book.images.large);
+			$('input[name=isbn]').val(book.isbn13);
+			$('input[name=average]').val(book.rating.average);
+			$('input[name=title]').val(book.title);
+			$('input[name=subtitle]').val(book.subtitle);
+			$('input[name=originTitle]').val(book.origin_title);
+			$('input[name=author]').val(book.author.join(','));
+			$('input[name=translator]').val(book.translator.join(','));
+			$('input[name=pubdate]').val(book.pubdate);
+			$('input[name=publisher]').val(book.publisher);
+			$('input[name=pages]').val(book.pages);
+			$('input[name=price]').val(book.price);
+			$('input[name=binding]').val(book.binding);
+			$('textarea[name=summary]').text(book.summary);
+			$('textarea[name=authorIntro]').text(book.author_intro);
+			$('textarea[name=catalog]').text(book.catalog);
+		}
+	</script>
+</head>
+<body>
+	#parse("/include/top.vm")
+	<div class="b-body">
+		<div class="ui grid">
+			<div class="three wide column">
+				#parse("/modules/manage/include/left.vm")
+			</div>
+			<div class="thirteen wide column">
+				<form class="ui form" action="/manage/book/save" method="post">
+					<h4 class="ui dividing header">
+						#if(!$book.id)
+							新增书籍
+						#else
+							编辑书籍
+						#end
+					</h4>
+					<div class="ui stacked segment">
+						<input type="hidden" name="id" value="$!userBookInfo.getId()" />
+						<input type="hidden" id="isbn" value="$!userBookInfo.getBookInfo().getIsbn()" />
+						<div class="three fields">
+							<div class="field">
+								<label>借阅状态</label>
+								<select class="ui dropdown location" name="location">
+									<option value="1">在家</option>
+									<option value="2">在公司</option>
+									<option value="3">在部门书架</option>
+								</select>
+								<input type="hidden" id="location" value="$!userBookInfo.getLocation()" />
+							</div>
+							<div class="field">
+								<label>阅读状态</label>
+								<select class="ui dropdown level" name="level">
+									<option value="1">未读</option>
+									<option value="2">阅读中</option>
+									<option value="3">已读完</option>
+									<option value="4">深刻理解</option>
+								</select>
+								<input type="hidden" id="level" value="$!userBookInfo.getLevel()" />
+							</div>
+							<!-- <div class="field">
+								<label>评分</label>
+								<div class="ui large star rating" data-rating="0" data-max-rating="5"></div>
+							</div> -->
+						</div>
+						<div class="field">
+							<label>推荐语</label>
+							<textarea rows="3" name="comment" placeholder="推荐语">$!userBookInfo.getComment()</textarea>
+						</div>
+						<div class="ui center">
+							<button class="ui primary button">保存</button>
+							<a href="/manage/book" class="ui basic button">返回</a>
+						</div>
+					</div>
+					<div class="field" id="searchBook">
+						<label>查找豆瓣书籍</label>
+						<div class="two fields">
+							<div class="field">
+								<select class="ui search dropdown" id="searchName"></select>
+								<input type="hidden" id="hdSearchName" />
+							</div>
+							<div class="field">
+								<a class="ui green button" id="btnSearch">查询</a>
+							</div>
+						</div>
+					</div>
+					<div class="ui piled segment">
+						<div class="two fields">
+							<div class="field">
+								<label>封面</label>
+								<img class="ui medium rounded image" id="imageUrl" src="" />
+								<input type="hidden" name="image" />
+								<input type="hidden" name="isbn" />
+							</div>
+							<div class="field">
+								<label>豆瓣评分</label>
+								<input type="text" name="average" placeholder="豆瓣评分" readonly="" />
+							</div>
+						</div>
+						<div class="two fields">
+							<div class="field">
+								<label>书名</label>
+								<input type="text" name="title" placeholder="书名" readonly="" />
+							</div>
+							<div class="field">
+								<label>副标题</label>
+								<input type="text" name="subtitle" placeholder="副标题" readonly="" />
+							</div>
+						</div>
+						<div class="field">
+							<label>原作名</label>
+							<input type="text" name="originTitle" placeholder="原作名" readonly="" />
+						</div>
+						<div class="two fields">
+							<div class="field">
+								<label>作者</label>
+								<input type="text" name="author" placeholder="作者" readonly="" />
+							</div>
+							<div class="field">
+								<label>译者</label>
+								<input type="text" name="translator" placeholder="译者" readonly="" />
+							</div>
+						</div>
+						<div class="two fields">
+							<div class="field">
+								<label>出版日期</label>
+								<input type="text" name="pubdate" placeholder="出版日期" readonly="" />
+							</div>
+							<div class="field">
+								<label>出版社</label>
+								<input type="text" name="publisher" placeholder="出版社" readonly="" />
+							</div>
+						</div>
+						<div class="three fields">
+							<div class="field">
+								<label>页数</label>
+								<input type="text" name="pages" placeholder="页数" readonly="" />
+							</div>
+							<div class="field">
+								<label>价格</label>
+								<input type="text" name="price" placeholder="价格" readonly="" />
+							</div>
+							<div class="field">
+								<label>装帧</label>
+								<input type="text" name="binding" placeholder="装帧" readonly="" />
+							</div>
+						</div>
+						<div class="field">
+							<label>内容简介</label>
+							<textarea rows="4" name="summary" placeholder="内容简介" readonly=""></textarea>
+						</div>
+						<div class="field">
+							<label>作者简介</label>
+							<textarea rows="2" name="authorIntro" placeholder="作者简介" readonly=""></textarea>
+						</div>
+						<div class="field">
+							<label>目录</label>
+							<textarea rows="8" name="catalog" placeholder="目录" readonly=""></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

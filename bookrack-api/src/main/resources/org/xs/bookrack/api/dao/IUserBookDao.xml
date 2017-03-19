@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xs.bookrack.api.dao.IUserBookDao">
+	
+	<!-- 字段 -->
+	<sql id="columnList">
+		id, user_id, book_id, location, level, score, comment, create_time
+	</sql>
+	<sql id="allColumnList">
+		ub.id, user_id, b.id as book_id, location, level, score, comment, create_time,
+		b.id as bid, isbn, title, subtitle, origin_title, average, author, translator, pubdate, 
+		publisher, image, binding, pages, price, summary, author_intro, catalog
+	</sql>
+	
+	<!-- 获取单条数据 -->
+	<select id="get" resultMap="UserBookInfoMap">
+		SELECT <include refid="allColumnList" />
+		FROM bookrack_user_book ub
+		JOIN bookrack_book b on ub.book_id = b.id
+		<where>1=1
+			<if test="id != null and id != ''">AND ub.id = #{id}</if>
+			<if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+		</where>
+	</select>
+	
+	<!-- 查询数据列表 -->
+	<select id="findList" resultMap="UserBookInfoMap">
+		SELECT <include refid="allColumnList" />
+		FROM bookrack_user_book ub
+		JOIN bookrack_book b on ub.book_id = b.id
+		<where>1=1
+			<if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+		</where>
+		ORDER BY create_time DESC
+	</select>
+	
+	<!-- 插入数据 -->
+	<insert id="add">
+		INSERT INTO bookrack_user_book
+			(id, user_id, book_id, location, level, score, comment, create_time)
+		VALUES
+			(#{id}, #{userId}, #{bookId}, #{location}, #{level}, #{score}, #{comment}, now())
+	</insert>
+	
+	<!-- 更新数据 -->
+	<update id="update">
+		UPDATE bookrack_user_book
+		<set>
+			<if test="userId != null and userId != ''">user_id = #{userId}, </if>
+			<if test="bookId != null and bookId != ''">book_id = #{bookId}, </if>
+			<if test="location != null and location != ''">location = #{location}, </if>
+			<if test="level != null and level != ''">level = #{level}, </if>
+			<if test="score != null and score != ''">score = #{score}, </if>
+			<if test="comment != null and comment != ''">comment = #{comment}, </if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 删除数据 -->
+	<delete id="delete">
+		DELETE FROM bookrack_user_book
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 用户书籍关联实体 -->
+	<resultMap id="UserBookInfoMap" type="org.xs.bookrack.api.entity.UserBookInfo">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="book_id" jdbcType="VARCHAR" property="bookId" />
+		<result column="location" jdbcType="VARCHAR" property="location" />
+		<result column="level" jdbcType="VARCHAR" property="level" />
+		<result column="score" jdbcType="VARCHAR" property="score" />
+		<result column="comment" jdbcType="VARCHAR" property="comment" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<association property="bookInfo" javaType="org.xs.bookrack.api.entity.BookInfo">
+			<id column="bid" jdbcType="VARCHAR" property="id" />
+			<result column="isbn" jdbcType="VARCHAR" property="isbn" />
+			<result column="title" jdbcType="VARCHAR" property="title" />
+			<result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+			<result column="origin_title" jdbcType="VARCHAR" property="originTitle" />
+			<result column="average" jdbcType="VARCHAR" property="average" />
+			<result column="author" jdbcType="VARCHAR" property="author" />
+			<result column="translator" jdbcType="VARCHAR" property="translator" />
+			<result column="pubdate" jdbcType="VARCHAR" property="pubdate" />
+			<result column="publisher" jdbcType="VARCHAR" property="publisher" />
+			<result column="image" jdbcType="VARCHAR" property="image" />
+			<result column="binding" jdbcType="VARCHAR" property="binding" />
+			<result column="pages" jdbcType="VARCHAR" property="pages" />
+			<result column="price" jdbcType="VARCHAR" property="price" />
+			<result column="summary" jdbcType="VARCHAR" property="summary" />
+			<result column="author_intro" jdbcType="VARCHAR" property="authorIntro" />
+			<result column="catalog" jdbcType="VARCHAR" property="catalog" />
+		</association>
+	 </resultMap>
+</mapper>

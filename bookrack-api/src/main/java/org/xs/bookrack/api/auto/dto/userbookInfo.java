@@ -9,9 +9,11 @@ public class userbookInfo {
 
     private String bookId;
 
-    private String score;
+    private String location;
 
-    private String grade;
+    private String level;
+
+    private String score;
 
     private String comment;
 
@@ -41,20 +43,28 @@ public class userbookInfo {
         this.bookId = bookId;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     public String getScore() {
         return score;
     }
 
     public void setScore(String score) {
         this.score = score;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
     }
 
     public String getComment() {

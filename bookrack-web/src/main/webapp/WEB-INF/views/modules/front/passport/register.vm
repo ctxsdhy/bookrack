@@ -2,6 +2,7 @@
 	<script type="text/javascript">
 		$(function() {
 			
+			//昵称是否重复
 			$.fn.form.settings.rules.nickNameIsExist = function(value) {
 				/*var flag;
 				$.ajax({
@@ -19,6 +20,7 @@
 				return true;
 			}
 			
+			//邮箱是否重复
 			$.fn.form.settings.rules.emailIsExist = function(value) {
 				/*var flag;
 				$.ajax({
@@ -38,7 +40,7 @@
     
 			$('.ui.form').form({
 				fields: {
-					nick_name: {
+					nickName: {
 						rules: [
 							{
 								type: 'empty',

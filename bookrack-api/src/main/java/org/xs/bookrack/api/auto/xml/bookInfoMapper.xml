@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="org.xs.bookrack.api.auto.dto.bookInfo">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="isbn" jdbcType="VARCHAR" property="isbn" />
-    <result column="average" jdbcType="VARCHAR" property="average" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
     <result column="origin_title" jdbcType="VARCHAR" property="originTitle" />
+    <result column="average" jdbcType="VARCHAR" property="average" />
     <result column="author" jdbcType="VARCHAR" property="author" />
     <result column="translator" jdbcType="VARCHAR" property="translator" />
     <result column="pubdate" jdbcType="VARCHAR" property="pubdate" />
+    <result column="publisher" jdbcType="VARCHAR" property="publisher" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="binding" jdbcType="VARCHAR" property="binding" />
     <result column="pages" jdbcType="VARCHAR" property="pages" />
@@ -19,8 +21,8 @@
     <result column="catalog" jdbcType="VARCHAR" property="catalog" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, isbn, average, subtitle, origin_title, author, translator, pubdate, image, binding, 
-    pages, price, summary, author_intro, catalog
+    id, isbn, title, subtitle, origin_title, average, author, translator, pubdate, publisher, 
+    image, binding, pages, price, summary, author_intro, catalog
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -33,18 +35,18 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="org.xs.bookrack.api.auto.dto.bookInfo">
-    insert into bookrack_book (id, isbn, average, 
-      subtitle, origin_title, author, 
-      translator, pubdate, image, 
-      binding, pages, price, 
-      summary, author_intro, catalog
-      )
-    values (#{id,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{average,jdbcType=VARCHAR}, 
-      #{subtitle,jdbcType=VARCHAR}, #{originTitle,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{translator,jdbcType=VARCHAR}, #{pubdate,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{binding,jdbcType=VARCHAR}, #{pages,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
-      #{summary,jdbcType=VARCHAR}, #{authorIntro,jdbcType=VARCHAR}, #{catalog,jdbcType=VARCHAR}
-      )
+    insert into bookrack_book (id, isbn, title, 
+      subtitle, origin_title, average, 
+      author, translator, pubdate, 
+      publisher, image, binding, 
+      pages, price, summary, 
+      author_intro, catalog)
+    values (#{id,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{originTitle,jdbcType=VARCHAR}, #{average,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{translator,jdbcType=VARCHAR}, #{pubdate,jdbcType=VARCHAR}, 
+      #{publisher,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{binding,jdbcType=VARCHAR}, 
+      #{pages,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{authorIntro,jdbcType=VARCHAR}, #{catalog,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.xs.bookrack.api.auto.dto.bookInfo">
     insert into bookrack_book
@@ -55,14 +57,17 @@
       <if test="isbn != null">
         isbn,
       </if>
-      <if test="average != null">
-        average,
+      <if test="title != null">
+        title,
       </if>
       <if test="subtitle != null">
         subtitle,
       </if>
       <if test="originTitle != null">
         origin_title,
+      </if>
+      <if test="average != null">
+        average,
       </if>
       <if test="author != null">
         author,
@@ -72,6 +77,9 @@
       </if>
       <if test="pubdate != null">
         pubdate,
+      </if>
+      <if test="publisher != null">
+        publisher,
       </if>
       <if test="image != null">
         image,
@@ -102,14 +110,17 @@
       <if test="isbn != null">
         #{isbn,jdbcType=VARCHAR},
       </if>
-      <if test="average != null">
-        #{average,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="subtitle != null">
         #{subtitle,jdbcType=VARCHAR},
       </if>
       <if test="originTitle != null">
         #{originTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="average != null">
+        #{average,jdbcType=VARCHAR},
       </if>
       <if test="author != null">
         #{author,jdbcType=VARCHAR},
@@ -119,6 +130,9 @@
       </if>
       <if test="pubdate != null">
         #{pubdate,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
@@ -149,14 +163,17 @@
       <if test="isbn != null">
         isbn = #{isbn,jdbcType=VARCHAR},
       </if>
-      <if test="average != null">
-        average = #{average,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="subtitle != null">
         subtitle = #{subtitle,jdbcType=VARCHAR},
       </if>
       <if test="originTitle != null">
         origin_title = #{originTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="average != null">
+        average = #{average,jdbcType=VARCHAR},
       </if>
       <if test="author != null">
         author = #{author,jdbcType=VARCHAR},
@@ -166,6 +183,9 @@
       </if>
       <if test="pubdate != null">
         pubdate = #{pubdate,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
@@ -194,12 +214,14 @@
   <update id="updateByPrimaryKey" parameterType="org.xs.bookrack.api.auto.dto.bookInfo">
     update bookrack_book
     set isbn = #{isbn,jdbcType=VARCHAR},
-      average = #{average,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       subtitle = #{subtitle,jdbcType=VARCHAR},
       origin_title = #{originTitle,jdbcType=VARCHAR},
+      average = #{average,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
       translator = #{translator,jdbcType=VARCHAR},
       pubdate = #{pubdate,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       binding = #{binding,jdbcType=VARCHAR},
       pages = #{pages,jdbcType=VARCHAR},

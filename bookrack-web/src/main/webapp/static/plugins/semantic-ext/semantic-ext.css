@@ -7,3 +7,6 @@
 .ui.center {
 	text-align: center;
 }
+.ui.clearing {
+	clear: both;
+}

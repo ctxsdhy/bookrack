@@ -17,7 +17,6 @@
 		<property name="realm" ref="userRealm" />
 		<property name="sessionManager" ref="defaultWebSessionManager" />
 	</bean>
-	<bean id="userRealm" class="org.xs.bookrack.web.common.security.UserRealm"></bean>
 	 
 	<!-- 自定义会话管理 -->
 	<bean id="defaultWebSessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">    
@@ -37,10 +36,8 @@
 		<property name="successUrl" value="/manage/book" />
 		<property name="filterChainDefinitions">
 			<value>
-				<!-- /static/** = anon
-				/favicon.ico = anon 
-				/manage/* = authc -->
-				/* = anon
+				/manage/** = authc
+				/** = anon
 			</value>
 		</property>
 	</bean>

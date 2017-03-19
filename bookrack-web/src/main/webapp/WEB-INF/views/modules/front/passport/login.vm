@@ -1,6 +1,23 @@
 #parse("/include/head.vm")
 	<script type="text/javascript">
 		$(function() {
+			
+			//验证用户
+			$.fn.form.settings.rules.verifyUser = function(value) {
+				var flag = true;
+				if(!$('#emailField').hasClass('error') && $('#password').val() != '') {
+					$.ajax({
+						url: "/verifyUser", type: "post", async: false, dataType: 'json', 
+						data: {email: $('#email').val(), password: $('#password').val()},
+						success: function(data) {
+							flag = data;
+						}
+					});
+				}
+				return flag;
+			}
+			
+			//表单验证
 			$('.ui.form').form({
 				fields: {
 					email: {
@@ -15,23 +32,29 @@
 							{
 								type: 'empty',
 								prompt: '请输入密码'
+							}, 
+							{
+								type: 'verifyUser',
+								prompt: '密码不正确'
 							}]
 					}
 				}
 			});
 		});
+		
+		
 	</script>
 </head>
 <body>
 	#parse("/include/top.vm")
 	<div class="b-body">
 		<div class="b-login">
-			<form class="ui form stacked segment">
-				<div class="field">
-					<input type="text" name="email" placeholder="邮箱">
+			<form class="ui form stacked segment" action="/doLogin" method="post">
+				<div class="field" id="emailField">
+					<input type="text" id="email" name="email" placeholder="邮箱">
 				</div>
 				<div class="field">
-					<input type="password" name="password" placeholder="密码">
+					<input type="password" id="password" name="password" placeholder="密码">
 				</div>
 				<div class="ui center">
 					<button class="ui blue button" type="submit">立即登录</button>

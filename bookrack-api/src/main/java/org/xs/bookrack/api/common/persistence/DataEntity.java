@@ -10,7 +10,7 @@ import com.alibaba.druid.util.StringUtils;
  * entity基类
  * @param <T>
  */
-public abstract class DataEntity<T> implements Serializable {
+public class DataEntity<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

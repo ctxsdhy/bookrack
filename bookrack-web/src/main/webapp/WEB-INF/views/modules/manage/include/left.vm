@@ -1,0 +1,16 @@
+<div class="ui vertical large menu" id="b-m-menu">
+	<div class="item"><i class="book layout icon"></i>我的书架
+		<div class="menu">
+			<a class="item" href="/manage/book">书籍管理</a>
+			<!-- <a class="item" href="/manage/tag">标签管理</a> -->
+		</div>
+	</div>
+	<!-- <div class="item"><i class="user layout icon"></i>个人设置
+		<div class="menu">
+			<a class="item">个人资料</a>
+			<a class="item">修改密码</a>
+			<a class="item">关联设置</a>
+			<a class="item">隐私设置</a>
+		</div>
+	</div> -->
+</div>

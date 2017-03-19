@@ -9,6 +9,8 @@ public class userInfo {
 
     private String email;
 
+    private String emailState;
+
     private String phone;
 
     private String password;
@@ -63,6 +65,14 @@ public class userInfo {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEmailState() {
+        return emailState;
+    }
+
+    public void setEmailState(String emailState) {
+        this.emailState = emailState;
     }
 
     public String getPhone() {
