@@ -1,0 +1,18 @@
+# Build Artifacts
+build/
+target/
+bin/
+
+# Eclipse Project Files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA Files
+*.iml
+*.ipr
+*.iws
+*.idea
+
+# Other Files
+*.log
